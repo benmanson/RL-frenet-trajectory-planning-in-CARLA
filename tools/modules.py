@@ -1181,8 +1181,8 @@ class ModuleWorld:
         x, y, z, yaw = frenet_to_inertial(self.init_s, self.init_d, self.global_csp)
         z += 0.1
 
-        self.hero_actor.set_velocity(carla.Vector3D(x=0, y=0, z=0))
-        self.hero_actor.set_angular_velocity(carla.Vector3D(x=0, y=0, z=0))
+        self.hero_actor.set_target_velocity(carla.Vector3D(x=0, y=0, z=0))
+        self.hero_actor.set_target_angular_velocity(carla.Vector3D(x=0, y=0, z=0))
         transform = carla.Transform(location=carla.Location(x=x, y=y, z=z), rotation=carla.Rotation(pitch=0.0, yaw=math.degrees(yaw), roll=0.0))
         self.hero_actor.set_transform(transform)
 
@@ -1728,8 +1728,8 @@ class TrafficManager:
             # create a line of sight sensor attached to the vehicle
             los_sensor = LineOfSightSensor(otherActor)
             otherActor.set_autopilot(False, self.tm_port)
-            otherActor.set_velocity(carla.Vector3D(x=0, y=0, z=0))
-            otherActor.set_angular_velocity(carla.Vector3D(x=0, y=0, z=0))
+            otherActor.set_target_velocity(carla.Vector3D(x=0, y=0, z=0))
+            otherActor.set_target_angular_velocity(carla.Vector3D(x=0, y=0, z=0))
             # keep actors and sensors to destroy them when an episode is finished
             cruiseControl = CruiseControl(otherActor, los_sensor, s, d, lane, self.module_manager, targetSpeed=targetSpeed)
             deq_s = deque([s], maxlen=50)
